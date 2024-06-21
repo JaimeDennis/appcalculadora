@@ -12,8 +12,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var txtUsuario: EditText
-    private lateinit var txtContrasena: EditText
+    private lateinit var inUsuario: EditText
+    private lateinit var inPassword: EditText
     private lateinit var btnIngresar: Button
     private lateinit var btnSalir: Button
 
@@ -21,9 +21,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        //iniciar componentes
-        iniciarComponentes()
-        eventoClic()
+
+        // Iniciar componente
+        init()
+        eventosClic()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -32,22 +33,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun iniciarComponentes() {
-        txtUsuario = findViewById(R.id.txtuser)
-        txtContrasena = findViewById(R.id.txtpass)
-        btnSalir = findViewById(R.id.btnCerrar)
+    private fun init() {
+        inUsuario = findViewById(R.id.txtuser)
+        inPassword = findViewById(R.id.txtpass)
         btnIngresar = findViewById(R.id.btnEntrar)
+        btnSalir = findViewById(R.id.btnCerrar)
     }
 
-    private fun eventoClic() {
+    private fun eventosClic() {
         btnIngresar.setOnClickListener(View.OnClickListener {
-            val usuario: String = getString(R.string.Usuario)
-            val pass: String = getString(R.string.Pass)
-            val nombre: String = getString(R.string.Nombre)
+            val user: String = getString(R.string.Usuario)
+            val password: String = getString(R.string.Pass)
+            val name: String = getString(R.string.Nombre)
 
-            if (txtUsuario.text.toString() == usuario && txtContrasena.text.toString() == pass) {
-                val intent = Intent(this, OperacionesActivity::class.java)
-                intent.putExtra("nombre", nombre)
+            if (inUsuario.text.toString() == user && inPassword.text.toString() == password) {
+                val intent = Intent(this, operacionesactivity::class.java)
+                intent.putExtra("nombre", name)
                 startActivity(intent)
             } else {
                 Toast.makeText(this, "El usuario o password no son correctos", Toast.LENGTH_SHORT).show()
